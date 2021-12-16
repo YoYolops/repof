@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as sc from "./styles";
 
-export default function Register() {
+export default function Register({ isVisible }) {
     const [ options, setOptions ] = useState({
         teachers: [],
         categories: [],
@@ -23,7 +23,11 @@ export default function Register() {
     }
 
     return (
-        <sc.MainContainer>
+        <sc.MainContainer
+            variants={variants}
+            initial="hidden"
+            animate={isVisible ? "visible" : "hidden"}
+        >
             <h1>Envie uma prova:</h1>
 
             <form className="form-container">
@@ -78,3 +82,22 @@ export default function Register() {
     )
 }
 
+const variants = {
+    hidden: {
+        opacity: 0,
+        scale: 0,
+        y: -20,
+        transition: {
+            duration: .2,
+        }
+    },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+            delay: .1,
+            duration: .2,
+        }
+    }
+}

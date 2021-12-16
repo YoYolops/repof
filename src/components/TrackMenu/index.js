@@ -3,6 +3,10 @@ import Track  from './Track';
 import { useState } from 'react';
 import Register from '../Register';
 import SearchByDiscipline from '../Searchers/ByDiscipline';
+import SearchByTeacher from '../Searchers/ByTeacher';
+import { BiMailSend } from 'react-icons/bi';
+import { AiOutlineFileSearch } from 'react-icons/ai';
+import { MdPersonSearch } from 'react-icons/md';
 
 export default function TrackMenu() {
     const [ wichIsActive, setWichIsActive ] = useState(2);
@@ -19,7 +23,10 @@ export default function TrackMenu() {
                     thisId: 0
                 }}
             >
-
+                <div className="icon-container">
+                    <MdPersonSearch color="#fff" size={18}/>
+                </div>
+                <SearchByTeacher isVisible={wichIsActive === 0}/>
             </Track>
             <Track
                 key={1}
@@ -30,7 +37,10 @@ export default function TrackMenu() {
                     thisId: 1
                 }}
             >
-                <SearchByDiscipline />
+                <div className="icon-container">
+                    <AiOutlineFileSearch color="#fff" size={18}/>
+                </div>
+                <SearchByDiscipline isVisible={wichIsActive === 1}/>
             </Track>
             <Track
                 key={2}
@@ -41,7 +51,10 @@ export default function TrackMenu() {
                     thisId: 2
                 }}
             >
-                <Register />
+                <div className="icon-container">
+                    <BiMailSend color="#fff" size={18}/>
+                </div>
+                <Register isVisible={wichIsActive === 2} />
             </Track>
         </sc.MainContainer>
     )

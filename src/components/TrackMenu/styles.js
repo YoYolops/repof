@@ -17,4 +17,12 @@ export const TrackTrail = styled(motion.section)`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+
+    >.icon-container {
+        position: absolute;
+        top: 5px;
+        right: 2px;
+        height: 25px;
+    }
 `

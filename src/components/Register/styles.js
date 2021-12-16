@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const MainContainer = styled.main`
+export const MainContainer = styled(motion.main)`
     display: flex;
     flex-direction: column;
     align-items: center;

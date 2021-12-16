@@ -5,14 +5,13 @@ export default function Track({children, config, changePresentState, presentStat
     const { thisId, color } = config;
     const [ variants, setVariants ] = useState({
         unactive: {
-            width: 22,
+            width: 24,
         },
         active: {
             width: 0,
         },
         
     })
-
     useLayoutEffect(() => {
         setVariants({
             unactive: {
@@ -29,7 +28,10 @@ export default function Track({children, config, changePresentState, presentStat
             layout
             color={color}
             onClick={() => {
-                if (presentState !== thisId) changePresentState(thisId)
+                if (presentState !== thisId) {
+                    changePresentState(thisId)
+                    
+                }
             }}
             variants={variants}
             initial="unactive"
@@ -45,3 +47,4 @@ export default function Track({children, config, changePresentState, presentStat
         </sc.TrackTrail>
     )
 }
+

@@ -2,7 +2,7 @@ import * as sc from './styles';
 import Selector from '../Components/Selector';
 import { useState } from 'react';
 
-export default function SearchByDiscipline({ isVisible }) {
+export default function SearchByTeacher({ isVisible }) {
     const [ selectorController, setSelectorController ] = useState(0);
     const [ selectorsData, setSelectorsData ] = useState({
         teacher: [
@@ -50,12 +50,11 @@ export default function SearchByDiscipline({ isVisible }) {
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
         >
-
-            <h1>Selecione por Disciplina</h1>
+            <h1>Selecione por Professor</h1>
 
             <Selector 
                 childrenData={selectorsData.teacher}
-                title="Período"
+                title="Professores"
                 thisId={0}
                 selectorController={selectorController}
                 activateNextSelector={setSelectorController}/>
@@ -73,12 +72,9 @@ export default function SearchByDiscipline({ isVisible }) {
                 activateNextSelector={setSelectorController}
                 permanent
                 blocked/>
-
         </sc.MainContainer>
     )
 }
-
-
 
 const variants = {
     hidden: {
@@ -98,4 +94,4 @@ const variants = {
             duration: .2,
         }
     }
-    }
+}
