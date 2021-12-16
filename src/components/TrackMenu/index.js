@@ -2,6 +2,7 @@ import * as sc from './styles';
 import Track  from './Track';
 import { useState } from 'react';
 import Register from '../Register';
+import SearchByDiscipline from '../Searchers/ByDiscipline';
 
 export default function TrackMenu() {
     const [ wichIsActive, setWichIsActive ] = useState(2);
@@ -29,7 +30,7 @@ export default function TrackMenu() {
                     thisId: 1
                 }}
             >
-
+                <SearchByDiscipline />
             </Track>
             <Track
                 key={2}
