@@ -8,11 +8,11 @@ export default function Register({ isVisible }) {
         disciplines: [],
     });
     const [ registrationData, setRegistrationData ] = useState({
-        name: null,
-        link: null,
-        category: null,
-        disciplines: null,
-        teacher: null,
+        name: "",
+        link: "",
+        category: "",
+        disciplines: "",
+        teacher: "",
     });
 
     function updateRegistrationData(key, value) {
