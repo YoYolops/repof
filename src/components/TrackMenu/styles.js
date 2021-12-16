@@ -14,4 +14,7 @@ export const TrackTrail = styled(motion.section)`
     height: 100vh;
     overflow-y: auto;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `

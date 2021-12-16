@@ -1,6 +1,7 @@
 import * as sc from './styles';
 import Track  from './Track';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Register from '../Register';
 
 export default function TrackMenu() {
     const [ wichIsActive, setWichIsActive ] = useState(2);
@@ -39,6 +40,7 @@ export default function TrackMenu() {
                     thisId: 2
                 }}
             >
+                <Register />
             </Track>
         </sc.MainContainer>
     )
