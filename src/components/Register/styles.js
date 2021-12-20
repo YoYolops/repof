@@ -23,6 +23,13 @@ export const MainContainer = styled(motion.main)`
         justify-content: center;
         width: 300px;
 
+        >.submit-input {
+            color: #fff;
+            background-color: #689D69;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
         >input {
             margin-bottom: 13px;
             height: 40px;

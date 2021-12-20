@@ -82,7 +82,6 @@ export default function Register({ isVisible }) {
                 <select 
                     required
                     onChange={ e => {
-                        console.log(e.target.value)
                         updateRegistrationData("teacherId", Number(e.target.value))
                     }}
                     value={registrationData.teacherId}
@@ -99,7 +98,7 @@ export default function Register({ isVisible }) {
                     onChange={ e => updateRegistrationData("examLink", e.target.value) }
                     value={registrationData.examLink}
                 />
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" className="submit-input"/>
             </form>
         </sc.MainContainer>
     )
