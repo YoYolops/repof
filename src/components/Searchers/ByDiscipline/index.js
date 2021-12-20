@@ -36,7 +36,7 @@ export default function SearchByDiscipline({ isVisible }) {
                     setSelectedSemesterData(selected.flat())
                 }}/>
             <Selector 
-                childrenData={[...new Set(selectedSemesterData.map(exam => exam.categoryName))]}
+                childrenData={[...new Set(selectedSemesterData.map((exam, i, arr) => `${exam.categoryName} (${exam.name} - ${exam.teacher})`))]}
                 title="Tipo"
                 thisId={1}
                 selectorController={selectorController}

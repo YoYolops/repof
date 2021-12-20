@@ -10,6 +10,8 @@ export default function Item({ title, isVisible, activateNextSelector, link }) {
             whileHover={{scale: 1.05}}
             onClick={() => activateNextSelector(title)}
             href={link}
+            target="_blank"
+            rel='noreferrer'
         >
             {title}
         </sc.ItemsContainer>

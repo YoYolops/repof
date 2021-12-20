@@ -18,7 +18,8 @@ export default function Selector(props) {
 
     function manageNextSelectorVisibility(value) {
         if(selectorController === thisId) activateNextSelector(prev => prev + 1)
-        setSelectedValue(value)
+        const nValue = value.split('(')[0].trim()
+        setSelectedValue(nValue)
     }
 
     return (
