@@ -4,45 +4,7 @@ import { useState } from 'react';
 
 export default function SearchByTeacher({ isVisible }) {
     const [ selectorController, setSelectorController ] = useState(0);
-    const [ selectorsData, setSelectorsData ] = useState({
-        teacher: [
-            {
-                name: "João Figueiredo",
-                exams: [{
-                    name: "Cálculo",
-                    categorie: "P1"
-                }]
-            },
-            {
-                name: "João Figueiredo",
-                exams: [{
-                    name: "Cálculo",
-                    categorie: "P1"
-                }]
-            },
-            {
-                name: "João Figueiredo",
-                exams: [{
-                    name: "Cálculo",
-                    categorie: "P1"
-                }]
-            },
-            {
-                name: "João Figueiredo",
-                exams: [{
-                    name: "Cálculo",
-                    categorie: "P1"
-                }]
-            },
-            {
-                name: "João Figueiredo",
-                exams: [{
-                    name: "Cálculo",
-                    categorie: "P1"
-                }]
-            },
-        ]
-    })
+    const [ selectorsData, setSelectorsData ] = useState([])
 
     return (
         <sc.MainContainer

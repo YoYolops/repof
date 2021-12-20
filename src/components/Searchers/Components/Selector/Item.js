@@ -1,6 +1,6 @@
 import * as sc from './styles';
 
-export default function Item({ title, isVisible, activateNextSelector }) {
+export default function Item({ title, isVisible, activateNextSelector, link }) {
 
     return (
         <sc.ItemsContainer
@@ -8,7 +8,8 @@ export default function Item({ title, isVisible, activateNextSelector }) {
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
             whileHover={{scale: 1.05}}
-            onClick={activateNextSelector}
+            onClick={() => activateNextSelector(title)}
+            href={link}
         >
             {title}
         </sc.ItemsContainer>

@@ -1,6 +1,6 @@
 import * as sc from './styles';
 import Item from './Item';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Selector(props) {
     const {
@@ -10,12 +10,15 @@ export default function Selector(props) {
         title,
         activateNextSelector,
         permanent,
-        blocked
+        blocked,
+        setSelectedValue,
+        link,
     } = props;
     const [ isClicked, setIsCLicked ] = useState(blocked);
 
-    function manageNextSelectorVisibility() {
+    function manageNextSelectorVisibility(value) {
         if(selectorController === thisId) activateNextSelector(prev => prev + 1)
+        setSelectedValue(value)
     }
 
     return (
@@ -32,7 +35,8 @@ export default function Selector(props) {
             isClicked && childrenData?.map((data, index) => (
                 <Item 
                     key={index}
-                    title={data.name}
+                    link={link ? link[index] : null}
+                    title={data}
                     isVisible={isClicked}
                     activateNextSelector={manageNextSelectorVisibility}/>))
         }</sc.SelectorContainer>
