@@ -1,19 +1,14 @@
 import * as sc from './styles';
 import Selector from '../Components/Selector';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import * as Service from '../../../service';
+import ControllerContext from '../../context/ControllerContext';
 
 export default function SearchByTeacher({ isVisible }) {
     const [ selectorController, setSelectorController ] = useState(0);
-    const [ selectorsData, setSelectorsData ] = useState([])
+    const { byTeacherData } = useContext(ControllerContext)
     const [ teacherSelectedData, setTeacherSelectedData ] = useState([])
     const [ examSelectedData, setExamSelectedData ] = useState([])
-
-    useEffect(() => {
-        Service.getExamsDataByTeacher()
-            .then((data) => setSelectorsData(data))
-            .catch(() => alert('erro'))
-    }, [setSelectorsData])
 
     return (
         <sc.MainContainer
@@ -24,13 +19,13 @@ export default function SearchByTeacher({ isVisible }) {
             <h1>Selecione por Professor</h1>
 
             <Selector 
-                childrenData={[...new Set(selectorsData.map(teacher => `${teacher.name} (${teacher.exams.length})`))]}
+                childrenData={[...new Set(byTeacherData.map(teacher => `${teacher.name} (${teacher.exams.length})`))]}
                 title="Professores"
                 thisId={0}
                 selectorController={selectorController}
                 activateNextSelector={setSelectorController}
                 setSelectedValue={value => {
-                    const teachersSelected = selectorsData.filter(teacher => teacher.name === value)
+                    const teachersSelected = byTeacherData.filter(teacher => teacher.name === value)
                     const exams = teachersSelected.map(teacher => teacher.exams)
                     const examsSelected = exams.flat();
                     setTeacherSelectedData(examsSelected)

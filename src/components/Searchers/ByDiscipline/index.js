@@ -1,19 +1,13 @@
 import * as sc from './styles';
 import Selector from '../Components/Selector';
-import { useEffect, useState } from 'react';
-import * as Service from '../../../service';
+import { useContext, useState } from 'react';
+import ControllerContext from '../../context/ControllerContext';
 
 export default function SearchByDiscipline({ isVisible }) {
+    const { baseData } = useContext(ControllerContext)
     const [ selectorController, setSelectorController ] = useState(0);
-    const [ baseData, setBaseData ] = useState([])
     const [ selectedSemesterData, setSelectedSemesterData ] = useState([])
     const [ selectedExams, setSelectedExams ] = useState([])
-
-    useEffect(() => {
-        Service.getExamsDataByDiscipline()
-            .then((data) => setBaseData(data))
-            .catch(() => alert('erro'))
-    }, [setSelectedSemesterData])
 
     return (
         <sc.MainContainer
