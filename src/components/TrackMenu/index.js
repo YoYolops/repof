@@ -1,15 +1,20 @@
 import * as sc from './styles';
 import Track  from './Track';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Register from '../Register';
 import SearchByDiscipline from '../Searchers/ByDiscipline';
 import SearchByTeacher from '../Searchers/ByTeacher';
 import { BiMailSend } from 'react-icons/bi';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { MdPersonSearch } from 'react-icons/md';
+import ControllerContext from '../context/ControllerContext';
+import LoadingScreen from '../LoadingScreen';
 
 export default function TrackMenu() {
     const [ wichIsActive, setWichIsActive ] = useState(2);
+    const { isLoading } = useContext(ControllerContext);
+
+    if (isLoading) return <LoadingScreen />
 
     return (
         <sc.MainContainer layout>

@@ -1,11 +1,14 @@
 import TrackMenu from "./components/TrackMenu";
+import { ControllerProvider } from "./components/context/ControllerContext";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-        <TrackMenu color="#689d69"/>
-    </div>
+      <ControllerProvider>
+        <div className="App">
+            <TrackMenu color="#689d69"/>
+        </div>
+      </ControllerProvider>
   );
 }
 

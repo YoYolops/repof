@@ -17,6 +17,7 @@ export default function LoadingScreen() {
                     isPaused={false}
                 />
             </div>
+            <p>Aguarde...</p>
         </sc.LoadingScreenContainer>
     )
 }

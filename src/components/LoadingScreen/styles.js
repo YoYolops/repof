@@ -18,8 +18,14 @@ export const LoadingScreenContainer = styled(motion.div)`
         justify-content: center;
         align-items: center;
         pointer-events: none;
+
         >svg {
             pointer-events: none;
         }
+    }
+
+    p {
+        color: #fff;
+        font-size: 22px;
     }
 `
