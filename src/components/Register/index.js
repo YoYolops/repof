@@ -4,7 +4,12 @@ import * as Service from '../../service';
 import ControllerContext from "../context/ControllerContext";
 
 export default function Register({ isVisible }) {
-    const { baseData, setIsLoading, setRefreshController } = useContext(ControllerContext)
+    const {
+        baseData,
+        setIsLoading,
+        setRefreshController,
+        setAlertConfig
+    } = useContext(ControllerContext)
     const [ selectedDisciplineTeachers, setSelectedDisciplineTeachers ] = useState([])
     const [ registrationData, setRegistrationData ] = useState({
         name: "",
@@ -28,11 +33,17 @@ export default function Register({ isVisible }) {
             .then((data) => {
                 setRefreshController(prev => prev + 1)
                 setIsLoading(false)
-                alert(`Criado sob o id: ${data.id}`)
+                setAlertConfig({
+                    isOpen: true,
+                    message: `Registrado sob o id: ${data.id}`
+                })
             })
-            .catch(() => {
+            .catch((error) => {
                 setIsLoading(false)
-                alert('erro')
+                setAlertConfig({
+                    isOpen: true,
+                    message: error.message
+                })
             })
     }
 

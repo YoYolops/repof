@@ -9,10 +9,11 @@ import { AiOutlineFileSearch } from 'react-icons/ai';
 import { MdPersonSearch } from 'react-icons/md';
 import ControllerContext from '../context/ControllerContext';
 import LoadingScreen from '../LoadingScreen';
+import Alert from '../Alert';
 
 export default function TrackMenu() {
     const [ wichIsActive, setWichIsActive ] = useState(2);
-    const { isLoading } = useContext(ControllerContext);
+    const { isLoading, alertConfig, alertToggle } = useContext(ControllerContext);
 
     if (isLoading) return <LoadingScreen />
 
@@ -61,6 +62,11 @@ export default function TrackMenu() {
                 </div>
                 <Register isVisible={wichIsActive === 2} />
             </Track>
+            <Alert 
+                isOpen={alertConfig.isOpen}
+                message={alertConfig.message}
+                toggle={alertToggle}
+            />
         </sc.MainContainer>
     )
 }

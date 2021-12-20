@@ -8,6 +8,17 @@ export function ControllerProvider({ children }) {
     const [ refreshController, setRefreshController ] = useState(0);
     const [ baseData, setBaseData ] = useState([])
     const [ byTeacherData, setbyTeacherData ] = useState([])
+    const [ alertConfig, setAlertConfig ] = useState({
+        isOpen: false,
+        message: "",
+    })
+
+    function alertToggle(bol) {
+        setAlertConfig(prev => ({
+            ...prev,
+            isOpen: bol,
+        }))
+    }
 
     useEffect(() => {
         let byDisciplineLoaded = false;
@@ -19,9 +30,12 @@ export function ControllerProvider({ children }) {
                 setBaseData(data)
                 if(byTeacherLoaded && byDisciplineLoaded) setIsLoading(false)
             })
-            .catch(() => {
+            .catch((error) => {
                 byDisciplineLoaded = true
-                alert('erro')
+                setAlertConfig({
+                    isOpen: true,
+                    message: error.message
+                })
                 if(byTeacherLoaded && byDisciplineLoaded) setIsLoading(false)
             })
 
@@ -31,9 +45,12 @@ export function ControllerProvider({ children }) {
                 setbyTeacherData(data)
                 if(byTeacherLoaded && byDisciplineLoaded) setIsLoading(false)
             })
-            .catch(() => {
+            .catch((error) => {
                 byTeacherLoaded = true
-                alert('erro')
+                setAlertConfig({
+                    isOpen: true,
+                    message: error.message
+                })
                 if(byTeacherLoaded && byDisciplineLoaded) setIsLoading(false)
             })
 
@@ -49,6 +66,9 @@ export function ControllerProvider({ children }) {
             setRefreshController,
             baseData,
             byTeacherData,
+            alertConfig,
+            setAlertConfig,
+            alertToggle
         }}>
             {children}
         </ControllerContext.Provider>
