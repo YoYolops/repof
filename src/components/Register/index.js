@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as sc from "./styles";
 import * as Service from '../../service';
+import ControllerContext from "../context/ControllerContext";
 
 export default function Register({ isVisible }) {
-    const [ disciplinesData, setDisciplinesData ] = useState([]);
+    const { baseData, setIsLoading, setRefreshController } = useContext(ControllerContext)
     const [ selectedDisciplineTeachers, setSelectedDisciplineTeachers ] = useState([])
     const [ registrationData, setRegistrationData ] = useState({
         name: "",
@@ -12,12 +13,6 @@ export default function Register({ isVisible }) {
         disciplineId: "",
         teacherId: 0,
     });
-
-    useEffect(() => {
-        Service.getExamsDataByDiscipline()
-            .then((data) => setDisciplinesData(data))
-            .catch(() => alert('erro'))
-    }, [setDisciplinesData])
 
     function updateRegistrationData(key, value) {
         setRegistrationData({
@@ -28,10 +23,17 @@ export default function Register({ isVisible }) {
 
     function submitManager(e) {
         e.preventDefault();
-        console.log(registrationData)
+        setIsLoading(true)
         Service.registerExam(registrationData)
-            .then((data) => alert(`Criado sob o id: ${data.id}`))
-            .catch(() => alert('erro'))
+            .then((data) => {
+                setRefreshController(prev => prev + 1)
+                setIsLoading(false)
+                alert(`Criado sob o id: ${data.id}`)
+            })
+            .catch(() => {
+                setIsLoading(false)
+                alert('erro')
+            })
     }
 
     return (
@@ -66,7 +68,7 @@ export default function Register({ isVisible }) {
                         name="Disciplina"
                         onChange={ e => {
                             const targetValue = Number(e.target.value)
-                            const filtered = disciplinesData.filter(discipline => discipline.id === targetValue)
+                            const filtered = baseData.filter(discipline => discipline.id === targetValue)
                             setSelectedDisciplineTeachers(filtered[0].teachers)
                             updateRegistrationData("disciplineId", Number(e.target.value))
                         }}
@@ -74,7 +76,7 @@ export default function Register({ isVisible }) {
                     >
                         <option value="" selected>Disciplina</option>
                     {
-                        disciplinesData.map(disc => <option value={disc.id} key={disc.id}>{disc.name}</option>)
+                        baseData.map(disc => <option value={disc.id} key={disc.id}>{disc.name}</option>)
                     }</select>
                 </div>
                 <select 
