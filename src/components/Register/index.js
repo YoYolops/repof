@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import * as sc from "./styles";
 import * as Service from '../../service';
 import ControllerContext from "../context/ControllerContext";
