@@ -7,7 +7,7 @@ export default function Item({ title, isVisible, activateNextSelector, link }) {
             variants={variants}
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
-            whileHover={{scale: 1.05}}
+            whileHover={{scale: 1.03}}
             onClick={() => activateNextSelector(title)}
             href={link}
             target="_blank"

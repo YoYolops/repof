@@ -52,7 +52,7 @@ const variants = {
     visible: {
         opacity: 1,
         scale: 1,
-        height: 35,
+        maxHeight: 35,
         transition: {
             delayChildren: 0.3,
             staggerChildren: 0.2
@@ -61,7 +61,7 @@ const variants = {
     active: {
         opacity: 1,
         scale: 1,
-        height: 120,
+        maxHeight: 120,
         transition: {
             delayChildren: 0.3,
             staggerChildren: 0.2
@@ -70,7 +70,7 @@ const variants = {
     permanent: {
         opacity: 1,
         scale: 1,
-        height: 280,
+        maxHeight: 280,
         transition: {
             delayChildren: 0.3,
             staggerChildren: 0.2,

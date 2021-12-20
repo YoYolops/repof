@@ -17,5 +17,8 @@ export const SelectorContainer = styled(motion.div)`
 `
 
 export const ItemsContainer = styled(motion.a)`
-
+    color: #458587;
+    margin-bottom: 3px;
+    padding: 5px 5px 0px 5px;
+    cursor: pointer;
 `
