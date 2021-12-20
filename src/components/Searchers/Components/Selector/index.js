@@ -1,6 +1,6 @@
 import * as sc from './styles';
 import Item from './Item';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Selector(props) {
     const {

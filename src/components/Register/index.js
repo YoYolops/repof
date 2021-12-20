@@ -29,6 +29,9 @@ export default function Register({ isVisible }) {
     function submitManager(e) {
         e.preventDefault();
         console.log(registrationData)
+        Service.registerExam(registrationData)
+            .then((data) => alert(`Criado sob o id: ${data.id}`))
+            .catch(() => alert('erro'))
     }
 
     return (
