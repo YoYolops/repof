@@ -30,7 +30,7 @@ export default function Alert({ isOpen, message, toggle }) {
             variants={variants}
         >
             <AiFillCloseCircle size={20} color="#fff" onClick={close}/>
-            <h1>Ops!</h1>
+            <h1>Olá!</h1>
             <p>{message}</p>
         </AlertContainer>
     )
@@ -76,7 +76,7 @@ const AlertContainer = styled(motion.div)`
         border-bottom: 1px solid #fff;
         font-weight: 700;
     }
-    
+
     >p {
         text-align: center;
         font-weight: 500;
