@@ -18,11 +18,13 @@ export const TrackTrail = styled(motion.section)`
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow-x: hidden;
 
     >.icon-container {
         position: absolute;
         top: 5px;
         right: 2px;
         height: 25px;
+        cursor: pointer;
     }
 `
