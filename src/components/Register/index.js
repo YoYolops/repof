@@ -1,25 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as sc from "./styles";
+import * as Service from '../../service';
 
 export default function Register({ isVisible }) {
-    const [ options, setOptions ] = useState({
-        teachers: [],
-        categories: [],
-        disciplines: [],
-    });
+    const [ disciplinesData, setDisciplinesData ] = useState([]);
+    const [ selectedDisciplineTeachers, setSelectedDisciplineTeachers ] = useState([])
     const [ registrationData, setRegistrationData ] = useState({
         name: "",
-        link: "",
-        category: "",
-        disciplines: "",
-        teacher: "",
+        examLink: "",
+        categoryId: "",
+        disciplineId: "",
+        teacherId: 0,
     });
+
+    useEffect(() => {
+        Service.getExamsDataByDiscipline()
+            .then((data) => setDisciplinesData(data))
+            .catch(() => alert('erro'))
+    }, [setDisciplinesData])
 
     function updateRegistrationData(key, value) {
         setRegistrationData({
             ...registrationData,
             [key]: value,
         })
+    }
+
+    function submitManager(e) {
+        e.preventDefault();
+        console.log(registrationData)
     }
 
     return (
@@ -30,7 +39,7 @@ export default function Register({ isVisible }) {
         >
             <h1>Envie uma prova:</h1>
 
-            <form className="form-container">
+            <form className="form-container" onSubmit={submitManager}>
                 <input 
                     type="text"
                     required
@@ -39,44 +48,53 @@ export default function Register({ isVisible }) {
                     value={registrationData.name}
                 />
 
-                <input 
-                    type="url"
-                    required
-                    placeholder="Link"
-                    onChange={ e => updateRegistrationData("link", e.target.value) }
-                    value={registrationData.link}
-                />
                 <div>
                     <select 
                         required
-                        onChange={ e => updateRegistrationData("category", e.target.value) }
-                        value={registrationData.category}
+                        onChange={ e => updateRegistrationData("categoryId", Number(e.target.value)) }
+                        value={registrationData.categoryId}
                     >
-                        <option value="none" selected disabled hidden>Categorias</option>
+                        <option value="" selected>Categorias</option>
                     {
-                        options.categories.map(opt => <option value={opt}>{opt}</option>)
+                        ['P1','P2','P3','2ch','Outras'].map((opt, index) => <option value={(index+1)} key={opt}>{opt}</option>)
                     }</select>
                     <select
                         required
                         name="Disciplina"
-                        onChange={ e => updateRegistrationData("disciplines", e.target.value) }
-                        value={registrationData.disciplines}
+                        onChange={ e => {
+                            const targetValue = Number(e.target.value)
+                            const filtered = disciplinesData.filter(discipline => discipline.id === targetValue)
+                            setSelectedDisciplineTeachers(filtered[0].teachers)
+                            updateRegistrationData("disciplineId", Number(e.target.value))
+                        }}
+                        value={registrationData.disciplineId}
                     >
-                        <option value="none" selected disabled hidden>Disciplina</option>
+                        <option value="" selected>Disciplina</option>
                     {
-                        options.disciplines.map(disc => <option value={disc}>{disc}</option>)
+                        disciplinesData.map(disc => <option value={disc.id} key={disc.id}>{disc.name}</option>)
                     }</select>
                 </div>
                 <select 
                     required
-                    disabled={!!registrationData.disciplines}
-                    onChange={ e => updateRegistrationData("teacher", e.target.value) }
-                    value={registrationData.teacher}
+                    onChange={ e => {
+                        console.log(e.target.value)
+                        updateRegistrationData("teacherId", Number(e.target.value))
+                    }}
+                    value={registrationData.teacherId}
                 >
-                    <option value="none" selected disabled hidden>Professor</option>
+                    <option value="" selected>Professor</option>
                 {
-                    options.teachers.map(teach => <option value={teach}>{teach}</option>)
+                    selectedDisciplineTeachers.map(teacher => <option value={teacher.id} key={teacher.id}>{teacher.name}</option>)
                 }</select>
+
+                <input 
+                    type="url"
+                    required
+                    placeholder="Link"
+                    onChange={ e => updateRegistrationData("examLink", e.target.value) }
+                    value={registrationData.examLink}
+                />
+                <input type="submit" value="Submit" />
             </form>
         </sc.MainContainer>
     )
