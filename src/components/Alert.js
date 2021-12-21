@@ -55,7 +55,7 @@ const AlertContainer = styled(motion.div)`
     position: fixed;
     top: 10px;
     left: 0px;
-    background-color: #f74f4f;
+    background-color: #ef7070;
     color: #fff;
     border-radius: 4px;
     display: flex;
